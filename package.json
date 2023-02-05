@@ -1,0 +1,17 @@
+{
+  "name": "good-luck",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "^6.4.1"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "server": "yarn workspaces @good-luck/server",
+    "web": "yarn workspaces @good-luck/web"
+  },
+  "packageManager": "yarn@3.4.1"
+}
