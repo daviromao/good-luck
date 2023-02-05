@@ -10,8 +10,8 @@
     "packages/*"
   ],
   "scripts": {
-    "server": "yarn workspaces @good-luck/server",
-    "web": "yarn workspaces @good-luck/web"
+    "server": "yarn workspace @good-luck/server",
+    "web": "yarn workspace @good-luck/web"
   },
   "packageManager": "yarn@3.4.1"
 }
