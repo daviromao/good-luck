@@ -1,4 +1,5 @@
 import { getCache, setCache } from '../utils/cache';
+import { sendSms } from '../utils/twilio';
 import { PhoneValidation } from './phoneValidationType';
 
 const codeExpiration = 1000 * 60 * 5;
@@ -20,7 +21,7 @@ export const createPhoneValidation = async (
     codeExpiration
   );
 
-  //TODO: send code to phone
+  await sendSms(phone, `Your verification code is ${code}.`);
 
   return wasCached;
 };
