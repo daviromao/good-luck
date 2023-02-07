@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
     "lerna": "^6.4.1"
   },
   "workspaces": [

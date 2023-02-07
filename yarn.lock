@@ -911,6 +911,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@entria/graphql-mongoose-loader@npm:^4.4.0":
+  version: 4.4.0
+  resolution: "@entria/graphql-mongoose-loader@npm:4.4.0"
+  peerDependencies:
+    graphql: "*"
+    graphql-relay: "*"
+    mongoose: "*"
+  checksum: b90ffb33d1291b43d4f10260900208869c9a04c2412b8da2eb951cdce0765eaf1542429e0db115b71f97dd5717526a38e7f95d5f70656684e756b3a41b1ae90d
+  languageName: node
+  linkType: hard
+
 "@eslint/eslintrc@npm:^1.4.1":
   version: 1.4.1
   resolution: "@eslint/eslintrc@npm:1.4.1"
@@ -939,10 +950,12 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@good-luck/server@workspace:packages/server"
   dependencies:
+    "@entria/graphql-mongoose-loader": ^4.4.0
     "@types/koa": ^2.13.5
     "@types/koa-router": ^7.4.4
     "@typescript-eslint/eslint-plugin": ^5.50.0
     "@typescript-eslint/parser": ^5.50.0
+    dataloader: ^2.2.1
     dotenv: ^16.0.3
     envalid: ^7.3.1
     eslint: ^8.33.0
@@ -950,6 +963,7 @@ __metadata:
     eslint-plugin-prettier: ^4.2.1
     graphql: ^16.6.0
     graphql-relay: ^0.10.0
+    jsonwebtoken: ^9.0.0
     koa: ^2.14.1
     koa-graphql: ^0.12.0
     koa-router: ^12.0.0
@@ -2401,6 +2415,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/jsonwebtoken@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "@types/jsonwebtoken@npm:9.0.1"
+  dependencies:
+    "@types/node": "*"
+  checksum: a7f0925e9a42ad3ae970364c63c5986d40da5c83d51d3f4e624eb0f064a380376f9e3fb3f2f837390a9ab80143f5d75fd51866da30e110f6b486a3379e1c768f
+  languageName: node
+  linkType: hard
+
 "@types/keygrip@npm:*":
   version: 1.0.2
   resolution: "@types/keygrip@npm:1.0.2"
@@ -3641,6 +3664,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"dataloader@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "dataloader@npm:2.2.1"
+  checksum: bc80fec711c264fa4244c749123658c7e73946aaa6f9906eb109763001751614aeb1688ffba2226c507bddb2da4da85432ae837cea8d09929e09bdb67048b96e
+  languageName: node
+  linkType: hard
+
 "dateformat@npm:^3.0.0":
   version: 3.0.3
   resolution: "dateformat@npm:3.0.3"
@@ -4718,6 +4748,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "good-luck@workspace:."
   dependencies:
+    "@types/jsonwebtoken": ^9.0.1
     lerna: ^6.4.1
     twilio: ^3.84.1
   languageName: unknown
@@ -5459,6 +5490,18 @@ __metadata:
     ms: ^2.1.1
     semver: ^5.6.0
   checksum: 93c9e3f23c59b758ac88ba15f4e4753b3749dfce7a6f7c40fb86663128a1e282db085eec852d4e0cbca4cefdcd3a8275ee255dbd08fcad0df26ad9f6e4cc853a
+  languageName: node
+  linkType: hard
+
+"jsonwebtoken@npm:^9.0.0":
+  version: 9.0.0
+  resolution: "jsonwebtoken@npm:9.0.0"
+  dependencies:
+    jws: ^3.2.2
+    lodash: ^4.17.21
+    ms: ^2.1.1
+    semver: ^7.3.8
+  checksum: b9181cecf9df99f1dc0253f91ba000a1aa4d91f5816d1608c0dba61a5623726a0bfe200b51df25de18c1a6000825d231ad7ce2788aa54fd48dcb760ad9eb9514
   languageName: node
   linkType: hard
 
@@ -7525,7 +7568,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7":
+"semver@npm:^7.0.0, semver@npm:^7.1.1, semver@npm:^7.3.4, semver@npm:^7.3.5, semver@npm:^7.3.7, semver@npm:^7.3.8":
   version: 7.3.8
   resolution: "semver@npm:7.3.8"
   dependencies:
