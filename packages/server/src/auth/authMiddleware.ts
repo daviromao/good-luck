@@ -11,8 +11,6 @@ export const userMiddleware = async (
     await next();
     return;
   }
-  console.log(token);
   ctx.state.user = await getUserFromToken(token);
-  console.log('ctx.state.user', ctx.state.user);
   await next();
 };
