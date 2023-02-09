@@ -7,7 +7,16 @@ import { userMiddleware } from './auth/authMiddleware';
 const app = new Koa();
 const router = new Router();
 
-router.all('/graphql', userMiddleware, graphqlHTTP({ schema, graphiql: true }));
+router.all(
+  '/graphql',
+  userMiddleware,
+  graphqlHTTP({
+    schema,
+    graphiql: {
+      headerEditorEnabled: true,
+    },
+  })
+);
 
 app.use(router.routes()).use(router.allowedMethods());
 
