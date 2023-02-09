@@ -1,6 +1,9 @@
+import { Types } from 'mongoose';
 import { UserModel, User } from './userModel';
 
-export const findUserById = async (id: string): Promise<User | null> => {
+export const findUserById = async (
+  id: Types.ObjectId | string
+): Promise<User | null> => {
   return await UserModel.findById(id);
 };
 
