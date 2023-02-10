@@ -12,6 +12,7 @@ const env = envalid.cleanEnv(process.env, {
   TWILIO_NUMBER: envalid.str(),
   TWILIO_SID: envalid.str(),
   TWILIO_TOKEN: envalid.str(),
+  JWT_SECRET: envalid.str(),
 });
 
 export default env;

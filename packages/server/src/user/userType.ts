@@ -1,11 +1,11 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
-import { globalIdField } from 'graphql-relay';
+import { connectionDefinitions, globalIdField } from 'graphql-relay';
 import { User } from './userModel';
 
 export const UserType = new GraphQLObjectType<User>({
   name: 'User',
   fields: () => ({
-    id: globalIdField('User'),
+    id: globalIdField('User', (user) => user._id.toString()),
     name: {
       type: GraphQLString,
       resolve: (user) => user.name,
@@ -15,4 +15,9 @@ export const UserType = new GraphQLObjectType<User>({
       resolve: (user) => user.phone,
     },
   }),
+});
+
+export const GraphQLUserConnection = connectionDefinitions({
+  name: 'User',
+  nodeType: UserType,
 });
