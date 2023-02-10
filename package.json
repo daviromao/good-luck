@@ -13,5 +13,8 @@
     "server": "yarn workspace @good-luck/server",
     "web": "yarn workspace @good-luck/web"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "dependencies": {
+    "twilio": "^3.84.1"
+  }
 }
