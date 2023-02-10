@@ -10,6 +10,7 @@ export const CreateGiveawayMutation = mutationWithClientMutationId({
     title: { type: GraphQLString },
     description: { type: GraphQLString },
     winnersCount: { type: GraphQLInt },
+    endsAt: { type: GraphQLString },
   },
   outputFields: {
     giveaway: {
@@ -17,7 +18,10 @@ export const CreateGiveawayMutation = mutationWithClientMutationId({
       resolve: (giveaway) => giveaway,
     },
   },
-  async mutateAndGetPayload({ title, description, winnersCount }, context) {
+  async mutateAndGetPayload(
+    { title, description, winnersCount, endsAt },
+    context
+  ) {
     if (!context.state.user) {
       throw new Error('You must be logged in to create a giveaway');
     }
@@ -27,6 +31,7 @@ export const CreateGiveawayMutation = mutationWithClientMutationId({
       description,
       winnersCount,
       owner: context.state.user._id,
+      endsAt,
     });
 
     return giveaway;

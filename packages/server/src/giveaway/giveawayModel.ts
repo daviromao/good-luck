@@ -9,6 +9,7 @@ export interface Giveaway {
   winnersCount: number;
   winners: Types.ObjectId[];
   participants: Types.ObjectId[];
+  endsAt: Date;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -40,6 +41,10 @@ export const giveawaySchema = new mongoose.Schema<Giveaway>(
       type: [mongoose.Schema.Types.ObjectId],
       ref: 'User',
       default: [],
+    },
+    endsAt: {
+      type: Date,
+      required: true,
     },
     participants: {
       type: [mongoose.Schema.Types.ObjectId],

@@ -16,6 +16,7 @@
   },
   "packageManager": "yarn@3.4.1",
   "dependencies": {
+    "bullmq": "^3.6.4",
     "twilio": "^3.84.1"
   }
 }

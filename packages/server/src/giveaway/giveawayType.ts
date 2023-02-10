@@ -73,6 +73,10 @@ export const GiveawayType = new GraphQLObjectType<Giveaway>({
         });
       },
     },
+    endsAt: {
+      type: new GraphQLNonNull(GraphQLString),
+      resolve: (giveaway) => giveaway.endsAt.toISOString(),
+    },
   }),
 });
 
