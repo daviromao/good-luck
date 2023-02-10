@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "devDependencies": {
+    "@types/jsonwebtoken": "^9.0.1",
     "lerna": "^6.4.1"
   },
   "workspaces": [
@@ -13,5 +14,9 @@
     "server": "yarn workspace @good-luck/server",
     "web": "yarn workspace @good-luck/web"
   },
-  "packageManager": "yarn@3.4.1"
+  "packageManager": "yarn@3.4.1",
+  "dependencies": {
+    "bullmq": "^3.6.4",
+    "twilio": "^3.84.1"
+  }
 }
