@@ -1,16 +1,29 @@
-import { GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import { verifyPhoneValidation } from '../../phoneValidation/phoneValidationService';
 import { createUser, findUserByPhone } from '../userService';
 import { UserType } from '../userType';
+import * as Yup from 'yup';
+
+type CreateUserArgs = {
+  name: string;
+  phone: string;
+  code: string;
+};
+
+const createUserSchema = Yup.object().shape({
+  name: Yup.string().required().min(3).max(50),
+  phone: Yup.string().required(),
+  code: Yup.string().required().length(6),
+});
 
 export const CreateUserMutation = mutationWithClientMutationId({
   name: 'CreateUser',
   description: 'Create a new user',
   inputFields: {
-    name: { type: GraphQLString },
-    phone: { type: GraphQLString },
-    code: { type: GraphQLString },
+    name: { type: new GraphQLNonNull(GraphQLString) },
+    phone: { type: new GraphQLNonNull(GraphQLString) },
+    code: { type: new GraphQLNonNull(GraphQLString) },
   },
   outputFields: {
     user: {
@@ -19,18 +32,20 @@ export const CreateUserMutation = mutationWithClientMutationId({
     },
   },
 
-  async mutateAndGetPayload({ name, phone, code }) {
-    const existsUser = await findUserByPhone(phone);
+  async mutateAndGetPayload(args: CreateUserArgs) {
+    const existsUser = await findUserByPhone(args.phone);
+
+    await createUserSchema.validate(args);
 
     if (existsUser) {
       throw new Error('User already exists');
     }
 
-    if (!(await verifyPhoneValidation(phone, code))) {
+    if (!(await verifyPhoneValidation(args.phone, args.code))) {
       throw new Error('Invalid code');
     }
 
-    const user = await createUser({ name, phone });
+    const user = await createUser({ name: args.name, phone: args.phone });
 
     return user;
   },
