@@ -24,6 +24,20 @@ export const insertParticipantInGiveaway = async (
   giveawayId: Types.ObjectId | string,
   participantId: Types.ObjectId
 ) => {
+  const giveaway = await findGiveawayById(giveawayId);
+
+  if (!giveaway) {
+    throw new Error('Giveaway not found');
+  }
+
+  if (giveaway.participants.includes(participantId)) {
+    throw new Error('You are already participating in this giveaway');
+  }
+
+  if (giveaway.endsAt.getTime() < Date.now()) {
+    throw new Error('This giveaway has already ended');
+  }
+
   return await GiveawayModel.findByIdAndUpdate(
     giveawayId,
     { $push: { participants: participantId } },
