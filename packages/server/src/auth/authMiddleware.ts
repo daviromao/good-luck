@@ -5,12 +5,15 @@ export const userMiddleware = async (
   ctx: Context,
   next: () => Promise<any>
 ) => {
-  const token = ctx.headers.authorization?.replace('Bearer ', '');
+  try {
+    const token = ctx.headers.authorization?.replace('Bearer ', '');
 
-  if (!token) {
+    if (!token) throw new Error('No token provided');
+
+    ctx.state.user = await getUserFromToken(token);
+  } catch (e) {
+    ctx.state.user = null;
+  } finally {
     await next();
-    return;
   }
-  ctx.state.user = await getUserFromToken(token);
-  await next();
 };
