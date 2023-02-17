@@ -1,0 +1,188 @@
+"""The root query type"""
+type Query {
+  giveawayQuery(id: String!): Giveaway
+
+  """All giveaways"""
+  allGiveawayQuery(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): GiveawayConnection!
+}
+
+type Giveaway {
+  """The ID of an object"""
+  id: ID!
+  owner: User!
+  title: String!
+  description: String!
+  winnersCount: Int!
+  winners(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): UserConnection!
+  participants(
+    """Returns the items in the list that come after the specified cursor."""
+    after: String
+
+    """Returns the first n items from the list."""
+    first: Int
+
+    """Returns the items in the list that come before the specified cursor."""
+    before: String
+
+    """Returns the last n items from the list."""
+    last: Int
+  ): UserConnection!
+  endsAt: String!
+}
+
+type User {
+  """The ID of an object"""
+  id: ID!
+  name: String
+  phone: String
+}
+
+"""A connection to a list of items."""
+type UserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [UserEdge]
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""An edge in a connection."""
+type UserEdge {
+  """The item at the end of the edge"""
+  node: User
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""A connection to a list of items."""
+type GiveawayConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [GiveawayEdge]
+}
+
+"""An edge in a connection."""
+type GiveawayEdge {
+  """The item at the end of the edge"""
+  node: Giveaway
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""The root mutation type"""
+type Mutation {
+  """Create a new phone validation code"""
+  CreatePhoneValidation(input: CreatePhoneValidationInput!): CreatePhoneValidationPayload
+
+  """Create a new user"""
+  CreateUserMutation(input: CreateUserInput!): CreateUserPayload
+
+  """Login with phone and code"""
+  Login(input: LoginInput!): LoginPayload
+
+  """Create a new giveaway"""
+  CreateGiveawayMutation(input: CreateGiveawayInput!): CreateGiveawayPayload
+
+  """Join in a giveaway"""
+  JoinInGiveaway(input: JoinInGiveawayInput!): JoinInGiveawayPayload
+}
+
+type CreatePhoneValidationPayload {
+  success: Boolean
+  clientMutationId: String
+}
+
+input CreatePhoneValidationInput {
+  phone: String!
+  clientMutationId: String
+}
+
+type CreateUserPayload {
+  user: User
+  clientMutationId: String
+}
+
+input CreateUserInput {
+  name: String!
+  phone: String!
+  code: String!
+  clientMutationId: String
+}
+
+type LoginPayload {
+  token: String
+  user: User
+  clientMutationId: String
+}
+
+input LoginInput {
+  phone: String
+  code: String
+  clientMutationId: String
+}
+
+type CreateGiveawayPayload {
+  giveaway: Giveaway
+  clientMutationId: String
+}
+
+input CreateGiveawayInput {
+  title: String
+  description: String
+  winnersCount: Int
+  endsAt: String
+  clientMutationId: String
+}
+
+type JoinInGiveawayPayload {
+  success: Boolean
+  clientMutationId: String
+}
+
+input JoinInGiveawayInput {
+  giveawayId: String
+  clientMutationId: String
+}
