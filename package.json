@@ -5,7 +5,10 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jsonwebtoken": "^9.0.1",
-    "lerna": "^6.4.1"
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "lerna": "^6.4.1",
+    "prettier": "^2.8.4"
   },
   "workspaces": [
     "packages/*"
