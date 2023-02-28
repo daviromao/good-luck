@@ -2,6 +2,7 @@ import { GraphQLBoolean, GraphQLNonNull, GraphQLString } from 'graphql';
 import { mutationWithClientMutationId } from 'graphql-relay';
 import { createPhoneValidation } from '../phoneValidationService';
 import * as Yup from 'yup';
+import { findUserByPhone } from '../../user/userService';
 
 type CreatePhoneValidationArgs = {
   phone: string;
@@ -21,12 +22,17 @@ export const CreatePhoneValidation = mutationWithClientMutationId({
     success: {
       type: GraphQLBoolean,
     },
+    hasAccount: {
+      type: GraphQLBoolean,
+    },
   },
 
   async mutateAndGetPayload({ phone }: CreatePhoneValidationArgs) {
     await createPhoneValidationSchema.validate({ phone });
     const wasCached = await createPhoneValidation(phone);
 
-    return { success: wasCached };
+    const user = await findUserByPhone(phone);
+
+    return { success: wasCached, hasAccount: !!user };
   },
 });
